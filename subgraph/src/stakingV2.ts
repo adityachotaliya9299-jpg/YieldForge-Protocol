@@ -1,4 +1,5 @@
 // src/stakingV2.ts
+// @ts-nocheck
 import { BigDecimal, BigInt } from "@graphprotocol/graph-ts";
 import { Staked, Withdrawn, RewardClaimed, ReferralBonus } from "../generated/StakingV2/StakingV2";
 import { Staker, StakeEvent, WithdrawEvent, ClaimEvent, ReferralEvent, ProtocolStats, ProtocolDay } from "../generated/schema";
@@ -45,17 +46,35 @@ function getOrCreateStats(): ProtocolStats {
 }
 
 function getDayId(timestamp: BigInt): string {
-  const dayTs  = timestamp.toI32() / 86400 * 86400;
-  const date   = new Date(dayTs * 1000);
-  return date.toISOString().split("T")[0];
+  const dayNumber: i32 = timestamp.toI32() / 86400;
+  return dayNumber.toString();
+}
+
+function dayNumberToDate(dayNumber: i32): string {
+  let z: i32 = dayNumber + 719468;
+  let era: i32 = (z >= 0 ? z : z - 146096) / 146097;
+  let doe: i32 = z - era * 146097;
+  let yoe: i32 = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+  let y: i32 = yoe + era * 400;
+  let doy: i32 = doe - (365 * yoe + yoe / 4 - yoe / 100);
+  let mp: i32 = (5 * doy + 2) / 153;
+  let d: i32 = doy - (153 * mp + 2) / 5 + 1;
+  let m: i32 = mp < 10 ? mp + 3 : mp - 9;
+  y = m <= 2 ? y + 1 : y;
+
+  const ys = y.toString();
+  const ms = m < 10 ? "0" + m.toString() : m.toString();
+  const ds = d < 10 ? "0" + d.toString() : d.toString();
+  return ys + "-" + ms + "-" + ds;
 }
 
 function getOrCreateDay(timestamp: BigInt): ProtocolDay {
-  const id  = getDayId(timestamp);
-  let   day = ProtocolDay.load(id);
+ const dayNum: i32 = timestamp.toI32() / 86400;
+  const id: string  = dayNum.toString();
+  let   day    = ProtocolDay.load(id);
   if (!day) {
     day = new ProtocolDay(id);
-    day.date          = id;
+    day.date          = dayNumberToDate(dayNum);
     day.tvl           = BigDecimal.fromString("0");
     day.dailyRewards  = BigDecimal.fromString("0");
     day.uniqueStakers = 0;
