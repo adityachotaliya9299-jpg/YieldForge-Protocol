@@ -72,12 +72,12 @@ contract RewardVault is Ownable, ReentrancyGuard {
     function distribute(address _stakingContract) external onlyOwner nonReentrant {
         require(_stakingContract != address(0), "Invalid staking contract");
 
-        uint256 balance = rewardToken.balanceOf(address(this));
-        require(balance > 0, "Nothing to distribute");
+        uint256 bal = rewardToken.balanceOf(address(this));
+        require(bal > 0, "Nothing to distribute");
 
-        uint256 toStaking = (balance * stakingAllocationBps) / 10000;
-        uint256 toBurn    = (balance * burnAllocationBps)    / 10000;
-        uint256 toOwner   = balance - toStaking - toBurn;
+        uint256 toStaking = (bal * stakingAllocationBps) / 10000;
+        uint256 toBurn    = (bal * burnAllocationBps)    / 10000;
+        uint256 toOwner   = bal - toStaking - toBurn;
 
         // Fund staking
         if (toStaking > 0) {
