@@ -1,0 +1,94 @@
+type Staker @entity(immutable: false) {
+  id:                  ID!
+  address:             String!
+  stakedAmount:        BigDecimal!
+  totalRewardsClaimed: BigDecimal!
+  pendingRewards:      BigDecimal!
+  tier:                Int!
+  referrer:            String
+  lockUntil:           BigInt!
+  stakedAt:            BigInt!
+  stakes:              [StakeEvent!]! @derivedFrom(field: "user")
+  withdrawals:         [WithdrawEvent!]! @derivedFrom(field: "user")
+  claims:              [ClaimEvent!]! @derivedFrom(field: "user")
+}
+
+type StakeEvent @entity(immutable: true) {
+  id:          ID!
+  user:        Staker!
+  amount:      BigDecimal!
+  tier:        Int!
+  lockUntil:   BigInt!
+  timestamp:   BigInt!
+  txHash:      String!
+  blockNumber: BigInt!
+}
+
+type WithdrawEvent @entity(immutable: true) {
+  id:        ID!
+  user:      Staker!
+  amount:    BigDecimal!
+  timestamp: BigInt!
+  txHash:    String!
+}
+
+type ClaimEvent @entity(immutable: true) {
+  id:        ID!
+  user:      Staker!
+  reward:    BigDecimal!
+  fee:       BigDecimal!
+  timestamp: BigInt!
+  txHash:    String!
+}
+
+type ReferralEvent @entity(immutable: true) {
+  id:        ID!
+  referrer:  Staker!
+  referee:   Staker!
+  bonus:     BigDecimal!
+  timestamp: BigInt!
+  txHash:    String!
+}
+
+type ProtocolDay @entity(immutable: false) {
+  id:            ID!
+  date:          String!
+  tvl:           BigDecimal!
+  dailyRewards:  BigDecimal!
+  uniqueStakers: Int!
+  newStakers:    Int!
+  timestamp:     BigInt!
+}
+
+type ProtocolStats @entity(immutable: false) {
+  id:               ID!
+  totalStaked:      BigDecimal!
+  totalStakers:     Int!
+  totalRewardsPaid: BigDecimal!
+  totalFeesPaid:    BigDecimal!
+  rewardRate:       BigDecimal!
+  updatedAt:        BigInt!
+}
+
+type VeSTKHolder @entity(immutable: false) {
+  id:        ID!
+  address:   String!
+  veBalance: BigDecimal!
+  stkLocked: BigDecimal!
+  lockEnd:   BigInt!
+  lockedAt:  BigInt!
+}
+
+type GovernanceProposal @entity(immutable: false) {
+  id:           ID!
+  proposer:     String!
+  description:  String!
+  startBlock:   BigInt!
+  endBlock:     BigInt!
+  state:        String!
+  forVotes:     BigDecimal!
+  againstVotes: BigDecimal!
+  abstainVotes: BigDecimal!
+  timestamp:    BigInt!
+  txHash:       String!
+}
