@@ -344,7 +344,6 @@ https://api.studio.thegraph.com/query/1744854/yieldforge-protocol/v1.0.0
 |-----|-------------|
 | [WHITEPAPER.md](./docs/WHITEPAPER.md) | Protocol architecture, tokenomics, governance model |
 | [SECURITY.md](./docs/SECURITY.md) | Audit checklist, known risks, pre-mainnet requirements |
-| [COMPETITIVE.md](./docs/COMPETITIVE.md) | Detailed comparison vs Lido, Convex, Yearn |
 
 ---
 
