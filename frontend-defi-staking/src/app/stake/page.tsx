@@ -10,6 +10,7 @@ import type { TierId } from "@/lib/wagmi";
 import TierSelector from "@/components/TierSelector";
 import EarningsSimulator from "@/components/EarningsSimulator";
 import TransactionHistory from "@/components/TransactionHistory";
+import APRDisplay from "@/components/APRDisplay";
 
 const fmt  = (n:string|number,dp=4) => Number(n).toLocaleString("en-US",{maximumFractionDigits:dp});
 const fmtK = (n:number) => n>=1_000_000?`${(n/1_000_000).toFixed(2)}M`:n>=1_000?`${(n/1_000).toFixed(1)}K`:n.toFixed(4);
@@ -40,6 +41,7 @@ export default function StakePage() {
   const [countdown,  setCountdown]  = useState(lockSecondsLeft);
   const [mounted,    setMounted]    = useState(false);
   const [showReferral, setShowReferral] = useState(false);
+  const [showCountdown, setShowCountdown] = useState(true);
 
   useEffect(()=>setMounted(true),[]);
   useEffect(()=>{
@@ -325,22 +327,50 @@ export default function StakePage() {
 
           {/* Lock countdown */}
           {isLocked&&(
-            <div className="yf-card" style={{padding:"1.4rem",borderTop:`2px solid ${TIERS[currentTier].color}`}}>
-              <div className="yf-label" style={{marginBottom:"0.5rem"}}>🔒 Unlock Countdown</div>
-              <div className="yf-mono" style={{fontSize:"1.7rem",fontWeight:800,color:TIERS[currentTier].color,marginBottom:"0.35rem"}}>{formatDuration(countdown)}</div>
-              <div style={{display:"flex",gap:"0.4rem",alignItems:"center",marginBottom:"0.35rem"}}>
-                <span style={{fontSize:"0.7rem",padding:"0.18rem 0.55rem",background:`${TIERS[currentTier].color}18`,border:`1px solid ${TIERS[currentTier].color}40`,borderRadius:"20px",color:TIERS[currentTier].color,fontWeight:600}}>
-                  {TIERS[currentTier].emoji} {TIERS[currentTier].name} · {TIERS[currentTier].multiplier}× multiplier
-                </span>
-              </div>
-              <p style={{fontSize:"0.75rem",color:"var(--t3)",lineHeight:1.6}}>Early withdrawal not permitted.</p>
+            <div className="yf-card" style={{overflow:"hidden",borderTop:`2px solid ${TIERS[currentTier].color}`}}>
+              {/* Collapsed header — always visible */}
+              <button onClick={()=>setShowCountdown(o=>!o)}
+                style={{width:"100%",padding:"1rem 1.25rem",background:"none",border:"none",cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",fontFamily:"inherit"}}>
+                <div style={{display:"flex",alignItems:"center",gap:"0.65rem"}}>
+                  <span style={{fontSize:"1.1rem"}}>🔒</span>
+                  <div style={{textAlign:"left"}}>
+                    <div style={{fontSize:"0.62rem",fontWeight:700,letterSpacing:"0.1em",color:"var(--t4)",textTransform:"uppercase",marginBottom:"0.15rem"}}>Unlock Countdown</div>
+                    <div className="yf-mono" style={{fontSize:"1rem",fontWeight:800,color:TIERS[currentTier].color}}>
+                      {formatDuration(countdown)}
+                    </div>
+                  </div>
+                </div>
+                <span style={{color:"var(--t4)",fontSize:"0.85rem"}}>{showCountdown?"▲":"▼"}</span>
+              </button>
+
+              {/* Expanded details */}
+              {showCountdown&&(
+                <div style={{padding:"0 1.25rem 1.25rem",borderTop:"1px solid var(--border)"}}>
+                  <div style={{marginTop:"0.85rem",display:"flex",flexDirection:"column",gap:"0"}}>
+                    {[
+                      {label:"Tier",        value:`${TIERS[currentTier].emoji} ${TIERS[currentTier].name} · ${TIERS[currentTier].multiplier}× multiplier`, color:TIERS[currentTier].color},
+                      {label:"Staked",      value:`${Number(stakedAmount).toFixed(4)} STK`,  color:"var(--blue)"},
+                      {label:"Unlocks in",  value:formatDuration(countdown),                  color:"var(--yellow)"},
+                      {label:"Unlock date", value:countdown > 0 ? new Date(Date.now() + countdown*1000).toLocaleDateString("en-US",{day:"numeric",month:"long",year:"numeric"}) : "Unlocked", color:"var(--t2)"},
+                    ].map(({label,value,color})=>(
+                      <div key={label} style={{display:"flex",justifyContent:"space-between",fontSize:"0.8rem",padding:"0.45rem 0",borderBottom:"1px solid var(--border)"}}>
+                        <span style={{color:"var(--t3)"}}>{label}</span>
+                        <span className="yf-mono" style={{color,fontWeight:600}}>{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{marginTop:"0.85rem",padding:"0.6rem 0.85rem",background:"rgba(251,191,36,0.05)",border:"1px solid rgba(251,191,36,0.15)",borderRadius:"8px",fontSize:"0.72rem",color:"var(--t4)",lineHeight:1.6}}>
+                    ℹ StakingV2 stores <strong style={{color:"var(--t2)"}}>one position per wallet</strong>. Re-staking extends your existing lock at the same or higher tier. Early withdrawal is not permitted.
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
           {/* APR card */}
           <div className="yf-card" style={{padding:"1.4rem"}}>
             <div className="yf-label" style={{marginBottom:"0.45rem"}}>Current APR</div>
-            <div className="yf-mono" style={{fontSize:"1.8rem",fontWeight:800,color:apr.c,marginBottom:"0.55rem"}}>{apr.t}</div>
+            <APRDisplay aprPercent={aprPercent} totalStaked={Number(totalStaked)} />
             <div style={{height:"6px",background:"var(--bg-input)",borderRadius:"99px",overflow:"hidden",marginBottom:"0.35rem"}}>
               <div style={{height:"100%",width:`${Math.min((Math.min(aprPercent,500)/500)*100,100)}%`,background:`linear-gradient(90deg,${TIERS[selTier].color},var(--blue))`,borderRadius:"99px"}}/>
             </div>
