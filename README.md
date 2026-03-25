@@ -34,6 +34,7 @@ This project demonstrates end-to-end DeFi development: from smart contract archi
 ---
 
 ## ✨ Features
+<<<<<<< HEAD
 
 ### 🏦 Tiered Staking (StakingV2)
 
@@ -44,6 +45,18 @@ This project demonstrates end-to-end DeFi development: from smart contract archi
 | 🥇 Gold | 90 days | **2×** | Long-term holders |
 | 💎 Diamond | 365 days | **3×** | Maximum yield |
 
+=======
+
+### 🏦 Tiered Staking (StakingV2)
+
+| Tier       | Lock     | Multiplier | Best For             |
+| ---------- | -------- | ---------- | -------------------- |
+| 🥉 Bronze  | 7 days   | **1×**     | Short-term, flexible |
+| 🥈 Silver  | 30 days  | **1.5×**   | Medium commitment    |
+| 🥇 Gold    | 90 days  | **2×**     | Long-term holders    |
+| 💎 Diamond | 365 days | **3×**     | Maximum yield        |
+
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 - **5%** transparent performance fee → RewardVault treasury
 - **3%** referral bonus — users earn by bringing others
 - Emergency pause with protected emergency withdrawals
@@ -57,6 +70,7 @@ This project demonstrates end-to-end DeFi development: from smart contract archi
 - 4% quorum required — prevents low-participation attacks
 
 ### 🎨 NFT Boost System
+<<<<<<< HEAD
 
 | Rarity | Boost | Supply | Price |
 |--------|-------|--------|-------|
@@ -81,6 +95,35 @@ This project demonstrates end-to-end DeFi development: from smart contract archi
 - Data auto-switches from simulated → live when subgraph syncs
 
 ### 🔔 Alert System
+=======
+
+| Rarity       | Boost    | Supply | Price         |
+| ------------ | -------- | ------ | ------------- |
+| 🥉 Common    | **+10%** | 1,000  | 0.001 ETH     |
+| 🥈 Rare      | **+20%** | 500    | 0.005 ETH     |
+| 🥇 Epic      | **+35%** | 100    | 0.020 ETH     |
+| 💎 Legendary | **+50%** | 10     | Owner airdrop |
+
+- **Soulbound ERC721** — non-transferable, permanently tied to wallet
+- **Not pay-to-win** — capped at +50% maximum, same % for all holders
+
+### 📈 Auto-Compounding Vault (xSTK)
+
+- Deposit STK → receive **xSTK** vault shares
+- Anyone calls `compound()` → rewards auto-restaked into vault
+- Caller earns **0.1% incentive** — no centralized keepers needed
+- xSTK price increases over time as rewards compound
+
+### 📊 Analytics + The Graph
+
+- **Live TVL**, APR, rewards from on-chain contracts
+- **30-day historical charts** from The Graph subgraph
+- Real-time leaderboard with on-chain staker rankings
+- Data auto-switches from simulated → live when subgraph syncs
+
+### 🔔 Alert System
+
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 - **Email** + **Telegram** notifications before lock expiry
 - Configurable days-before-unlock (1/2/3/7/14 days)
 - Vercel daily cron job for automated delivery
@@ -152,6 +195,7 @@ YieldForge Protocol
 
 ## 📋 Deployed Contracts (Sepolia — All Verified ✅)
 
+<<<<<<< HEAD
 | Contract | Address | Etherscan |
 |----------|---------|-----------|
 | StakingToken (STK) | `0xe2E63678a54AA74f79b0AE68455db2E3c34d4e34` | [View ↗](https://sepolia.etherscan.io/address/0xe2E63678a54AA74f79b0AE68455db2E3c34d4e34) |
@@ -165,12 +209,28 @@ YieldForge Protocol
 | TimelockController | `0x377dd0e113f9A7e7D9B35e48Be18aaE207326910` | [View ↗](https://sepolia.etherscan.io/address/0x377dd0e113f9A7e7D9B35e48Be18aaE207326910) |
 | YieldForgeNFT | `0x9139a15ce22Fd3Ee7B8E08402Fc1220A33df55c8` | [View ↗](https://sepolia.etherscan.io/address/0x9139a15ce22Fd3Ee7B8E08402Fc1220A33df55c8) |
 | PriceOracle | `0x4d2dB3BEdDEBBA86d10463eDfC35f57988400a6f` | [View ↗](https://sepolia.etherscan.io/address/0x4d2dB3BEdDEBBA86d10463eDfC35f57988400a6f) |
+=======
+| Contract           | Address                                      | Etherscan                                                                                 |
+| ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| StakingToken (STK) | `0xe2E63678a54AA74f79b0AE68455db2E3c34d4e34` | [View ↗](https://sepolia.etherscan.io/address/0xe2E63678a54AA74f79b0AE68455db2E3c34d4e34) |
+| RewardToken (RWD)  | `0xE6f0adEE844A89Cd554e188609B0A44895f5Bf8D` | [View ↗](https://sepolia.etherscan.io/address/0xE6f0adEE844A89Cd554e188609B0A44895f5Bf8D) |
+| StakingV1          | `0x84b969e7c086Ae80498e46d139F1efF10Ad8e409` | [View ↗](https://sepolia.etherscan.io/address/0x84b969e7c086Ae80498e46d139F1efF10Ad8e409) |
+| StakingV2          | `0x47e8c6f0A59dcD5977941Bac675b891Fd4c026d2` | [View ↗](https://sepolia.etherscan.io/address/0x47e8c6f0A59dcD5977941Bac675b891Fd4c026d2) |
+| AutoCompounder     | `0x74519dA50AD67DcC497cD531dBFa7785Fc8D5C16` | [View ↗](https://sepolia.etherscan.io/address/0x74519dA50AD67DcC497cD531dBFa7785Fc8D5C16) |
+| RewardVault        | `0xaB60e009F7e0b5564CF516E80c0ff5b34bb2A13B` | [View ↗](https://sepolia.etherscan.io/address/0xaB60e009F7e0b5564CF516E80c0ff5b34bb2A13B) |
+| VeSTK              | `0x20196Bbc7e69B0Bd2d37e63a34F14259A9f75D03` | [View ↗](https://sepolia.etherscan.io/address/0x20196Bbc7e69B0Bd2d37e63a34F14259A9f75D03) |
+| YieldForgeGovernor | `0xc9DF08305f794bC0D7D9Fc63a229957582685A11` | [View ↗](https://sepolia.etherscan.io/address/0xc9DF08305f794bC0D7D9Fc63a229957582685A11) |
+| TimelockController | `0x377dd0e113f9A7e7D9B35e48Be18aaE207326910` | [View ↗](https://sepolia.etherscan.io/address/0x377dd0e113f9A7e7D9B35e48Be18aaE207326910) |
+| YieldForgeNFT      | `0x9139a15ce22Fd3Ee7B8E08402Fc1220A33df55c8` | [View ↗](https://sepolia.etherscan.io/address/0x9139a15ce22Fd3Ee7B8E08402Fc1220A33df55c8) |
+| PriceOracle        | `0x4d2dB3BEdDEBBA86d10463eDfC35f57988400a6f` | [View ↗](https://sepolia.etherscan.io/address/0x4d2dB3BEdDEBBA86d10463eDfC35f57988400a6f) |
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 ```bash
 node >= 20.18.1
 foundry (forge, cast, anvil)
@@ -178,12 +238,17 @@ git
 ```
 
 ### Clone & Setup
+<<<<<<< HEAD
+=======
+
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 ```bash
 git clone https://github.com/adityachotaliya9299-jpg/yield-forge-protocol.git
 cd yield-forge-protocol
 ```
 
 ### Smart Contracts
+
 ```bash
 cd contracts
 forge install
@@ -193,6 +258,7 @@ forge coverage           # coverage report
 ```
 
 ### Frontend
+
 ```bash
 cd frontend-defi-staking
 npm install
@@ -203,6 +269,7 @@ npm run dev
 ```
 
 ### Environment Variables
+
 ```env
 NEXT_PUBLIC_STAKING_TOKEN=0xe2E63678a54AA74f79b0AE68455db2E3c34d4e34
 NEXT_PUBLIC_REWARD_TOKEN=0xE6f0adEE844A89Cd554e188609B0A44895f5Bf8D
@@ -238,6 +305,7 @@ forge test --match-contract EconomicSecurityTest -vvv        # attack simulation
 
 ### Coverage
 
+<<<<<<< HEAD
 | Contract | Lines | Branches |
 |----------|-------|----------|
 | AutoCompounder | 98% | 76% |
@@ -250,6 +318,21 @@ forge test --match-contract EconomicSecurityTest -vvv        # attack simulation
 | **Overall** | **76%** | **64%** |
 
 ### Verified Invariants (Stateful Fuzzing — 128,000 calls each)
+=======
+| Contract       | Lines   | Branches |
+| -------------- | ------- | -------- |
+| AutoCompounder | 98%     | 76%      |
+| RewardVault    | 100%    | 73%      |
+| StakingToken   | 100%    | 100%     |
+| RewardToken    | 100%    | 100%     |
+| StakingV2      | 89%     | 64%      |
+| VeSTK          | 90%     | 64%      |
+| YieldForgeNFT  | 90%     | 70%      |
+| **Overall**    | **76%** | **64%**  |
+
+### Verified Invariants (Stateful Fuzzing — 128,000 calls each)
+
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 1. `contractSTKBalance ≥ totalStaked` — no funds can disappear
 2. `Σ(userStaked) == totalStaked` — accounting always consistent
 3. `rewardPerToken` never decreases — rewards only accumulate
@@ -258,6 +341,10 @@ forge test --match-contract EconomicSecurityTest -vvv        # attack simulation
 6. Emergency withdraw only callable when paused
 
 ### Attack Simulations — All Blocked ✅
+<<<<<<< HEAD
+=======
+
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 - Flash stake attack (blocked by lock period)
 - Late staker reward theft (blocked by `rewardPerTokenPaid`)
 - Referral self-referral (explicit check)
@@ -282,6 +369,10 @@ graph deploy --studio yieldforge-protocol \
 **Indexed entities:** `Staker`, `StakeEvent`, `WithdrawEvent`, `ClaimEvent`, `ReferralEvent`, `ProtocolDay`, `ProtocolStats`, `VeSTKHolder`, `GovernanceProposal`
 
 **Live endpoint:**
+<<<<<<< HEAD
+=======
+
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 ```
 https://api.studio.thegraph.com/query/1744854/yieldforge-protocol/v1.0.0
 ```
@@ -290,6 +381,7 @@ https://api.studio.thegraph.com/query/1744854/yieldforge-protocol/v1.0.0
 
 ## ⚔️ Why YieldForge vs Alternatives
 
+<<<<<<< HEAD
 | Feature | Lido | Convex | Yearn | **YieldForge** |
 |---------|------|--------|-------|----------------|
 | Lock tiers (1×–3× multiplier) | ❌ | ❌ | ❌ | ✅ |
@@ -300,11 +392,24 @@ https://api.studio.thegraph.com/query/1744854/yieldforge-protocol/v1.0.0
 | Auto-compound vault | ✅ | ✅ | ✅ | ✅ |
 | On-chain treasury | Partial | ✅ | ✅ | ✅ |
 | Honest APR display | ❌ | ❌ | ❌ | ✅ |
+=======
+| Feature                       | Lido    | Convex  | Yearn | **YieldForge** |
+| ----------------------------- | ------- | ------- | ----- | -------------- |
+| Lock tiers (1×–3× multiplier) | ❌      | ❌      | ❌    | ✅             |
+| NFT boost system              | ❌      | ❌      | ❌    | ✅             |
+| Referral bonus (3%)           | ❌      | ❌      | ❌    | ✅             |
+| 0% deposit/withdrawal fee     | ❌      | ❌      | ❌    | ✅             |
+| Accessible governance         | ❌      | Partial | ❌    | ✅             |
+| Auto-compound vault           | ✅      | ✅      | ✅    | ✅             |
+| On-chain treasury             | Partial | ✅      | ✅    | ✅             |
+| Honest APR display            | ❌      | ❌      | ❌    | ✅             |
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 
 ---
 
 ## 🗺 Roadmap
 
+<<<<<<< HEAD
 | Phase | Status | Features |
 |-------|--------|----------|
 | Phase 1 | ✅ Complete | StakingV1, basic frontend |
@@ -313,24 +418,46 @@ https://api.studio.thegraph.com/query/1744854/yieldforge-protocol/v1.0.0
 | Phase 4 | ✅ Complete | NFT boosts + Chainlink oracle |
 | Phase 5 | 🔜 Next | ETH/USDC pools, StakingV3 with NFT integration |
 | Phase 6 | 🔜 Future | Mainnet (Arbitrum) + professional audit |
+=======
+| Phase   | Status      | Features                                       |
+| ------- | ----------- | ---------------------------------------------- |
+| Phase 1 | ✅ Complete | StakingV1, basic frontend                      |
+| Phase 2 | ✅ Complete | StakingV2 — tiers, fees, referrals             |
+| Phase 3 | ✅ Complete | veSTK governance + DAO voting                  |
+| Phase 4 | ✅ Complete | NFT boosts + Chainlink oracle                  |
+| Phase 5 | 🔜 Next     | ETH/USDC pools, StakingV3 with NFT integration |
+| Phase 6 | 🔜 Future   | Mainnet (Arbitrum) + professional audit        |
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 
 ---
 
 ## 🛠 Tech Stack
 
 **Smart Contracts**
+<<<<<<< HEAD
+=======
+
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 - Solidity 0.8.24
 - Foundry (forge, cast, anvil)
 - OpenZeppelin Contracts v5
 - Chainlink Price Feeds
 
 **Frontend**
+<<<<<<< HEAD
+=======
+
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 - Next.js 15 (App Router)
 - wagmi v2 + viem
 - TypeScript
 - The Graph (subgraph queries)
 
 **Infrastructure**
+<<<<<<< HEAD
+=======
+
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 - Vercel (frontend + cron jobs)
 - The Graph Studio (event indexing)
 - Alchemy (RPC)
@@ -340,10 +467,17 @@ https://api.studio.thegraph.com/query/1744854/yieldforge-protocol/v1.0.0
 
 ## 📄 Documentation
 
+<<<<<<< HEAD
 | Doc | Description |
 |-----|-------------|
 | [WHITEPAPER.md](./docs/WHITEPAPER.md) | Protocol architecture, tokenomics, governance model |
 | [SECURITY.md](./docs/SECURITY.md) | Audit checklist, known risks, pre-mainnet requirements |
+=======
+| Doc                                   | Description                                            |
+| ------------------------------------- | ------------------------------------------------------ |
+| [WHITEPAPER.md](./docs/WHITEPAPER.md) | Protocol architecture, tokenomics, governance model    |
+| [SECURITY.md](./docs/SECURITY.md)     | Audit checklist, known risks, pre-mainnet requirements |
+>>>>>>> aabdfcb (feat: faucet contract with 24h cooldown)
 
 ---
 
